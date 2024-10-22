@@ -1,0 +1,152 @@
+
+
+   <!-- <div class="card">
+
+
+        <div class="card-body">
+            {% for book in all_books %}
+            <strong>   
+
+                {{book.Title}}
+    
+            </strong>
+    
+            <hr> 
+
+            <p> <strong> ID: </strong> {{book.id}} </p>
+
+            <p> <strong> Author: </strong> {{book.Author}} </p>
+
+            <p> <strong> ISBN: </strong> {{book.ISBN}} </p>
+
+            <p> <strong> Published Date: </strong> {{book.Published_Date}} </p>
+
+            <p> <strong> Number of copies: </strong> {{book.number_of_copies}} </p>
+           <form method="POST" >
+                {% csrf_token %}
+
+                <input type="hidden" name="book_id" value="{{book.id}}"/>
+                <button type="submit" > Check Out </button>
+
+            </form> 
+            <a href="{% url 'Borrow' %}"> Check out </a>
+            <hr>
+            <br> <br>
+            {% endfor %}
+           
+    </div>
+
+    <br>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ {% block content %} {% for message in messages %}
+<div class="alert alert-{{message.tags}} rounded-0" role="alert">
+  {{message}}
+</div>
+{% endfor %}
+<center>
+  <br />
+  <h1 class="display-5 fw-bold">Available Books</h1>
+  <br />
+  <div class="input-group container">
+    <input
+      id="search"
+      type="search"
+      class="form-control rounded"
+      placeholder="Search Book"
+      aria-label="Search"
+      aria-describedby="search-addon"
+    />
+  </div>
+</center>
+<br />
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th class="" scope="col">Book Name</th>
+        <th class="" scope="col">Author Name</th>
+        <th class="" scope="col">Available copies</th>
+        <th class="" scope="col">ISBN</th>
+        <th class="" scope="col">Borrow/Return</th>
+        
+      </tr>
+    </thead>
+    <tbody id="table_data">
+      {% for book in all_books %}
+      <tr>
+        <td>{{book.Title}}</td>
+        <td>{{book.Author}}</td>
+        <td>{{book.number_of_copies}}</td>
+        <td>{{book.ISBN}}</td>
+        
+        <td>
+          <center>
+            <form action="Borrow" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="book_id" value="{{book.id}}" />
+              <button type="submit" class="btn btn-outline-success btn-sm">
+                <b>Check out</b>
+              </button>
+            </form>
+          </center>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#search").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#table_data tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
+</script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .input-group {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  body {
+    background: linear-gradient(#87f4b5, #93cbf1);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+
+{% block content %}
+
+    <body>
+
+        <div class="container bg-light shadow-md p-5 form-layout">
+
+            <h2> Create record </h3>
+            <br><br>
+            <h4> Start adding in the required details for your record. </h6>
+            <br><br>
+            <hr>
+            <br>
+
+            <form method="POST" >
+
+                {% csrf_token %}
+
+                {{book.as_p}}
+
+
+                <button type="submit" class="btn btn-primary"> 
+                    
+                   Add Book
+
+                </button>
+
+                &nbsp;
+
+                <a href="{% url '' %}" class="btn btn-secondary"> 
+
+
+                    Return 
+
+                </a>
+
+
+            </form>
+
+        </div>
+
+        <br>
+
+    </body>
+
+{% endblock %}

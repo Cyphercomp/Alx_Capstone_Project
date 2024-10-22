@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+       <h1><strong>THIS IS OUR LIBRARY MANAGEMENT SYSTEM</strong> </h1> 
+
+        
+            <span><a href=" {% url 'register' %}"> Register </a></span>
+            <br> <br>
+            <!--<span><a href="{% url 'Addbook' %}"> Add a Book</a></span>-->
+            <br> <br>
+            <span> <a href="{% url 'login' %}"> Login </a></span>
+            <br> <br>
+            <hr> 
+            <br><br>
+            
+            <div> {% include 'Library/Viewbook.html' %}</div>
+            
+            <br>
+    </body>
+</html>
+
+
+
+
+ 
+
+
+
